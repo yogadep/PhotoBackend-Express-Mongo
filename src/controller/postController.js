@@ -23,7 +23,7 @@ export const createPost = async (req, res) => {
             title,
             content,
             image,
-            createdBy: req.user.userId, // ID admin dari JWT
+            createdBy: req.user.userId,
         });
         const savedPost = await newPost.save();
         res.status(201).json({ post: savedPost });
