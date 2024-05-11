@@ -34,3 +34,25 @@ export const createPost = async (req, res) => {
         });
     }
 }
+
+export const updatePost = async (req, res) => {
+    const { id } = req.params;
+    const { title, content } = req.body;
+    const image = req.file.filename;
+    try {
+        const updPost = {
+            title,
+            content,
+            image,
+            createdBy: req.user.userId,
+        }
+        const updatedPost = await Post.findOneAndUpdate(
+            { _id : id },
+            { $set: updPost },
+            { new: true }
+        )
+        return res.status(200).json(updatedPost)
+    } catch (error) {
+        return res.status(400).json({error : "Terjadi kesalahan mengubah postingan", detail: error.message})
+    }
+}
