@@ -12,6 +12,20 @@ export const getAllPosts = async (req, res)=>{
     }
 }
 
+export const getPost = async (req, res) => {
+    const post = await Post.findById(req.params.id);
+
+    if(!post) return res.status(400).json({ error: 'Postingan tidak ditemukan' })
+    try {
+        return res.status(200).json({ post })
+    } catch (error) {
+        return res.status(200).json(
+            { error: 'Terjadi kesalahan server' },
+            { detail : error.message }
+        )
+    }
+}
+
 export const createPost = async (req, res) => {
     if (!req.file) {
         res.status(400).json({ error: 'Tidak ada file yang diunggah' });
