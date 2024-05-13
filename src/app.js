@@ -17,6 +17,7 @@ app.use('/posts', postRouter)
 
 const url = `url mongodb`
 
+// connect
 const connect = async () => {
     try {
         await mongoose.connect(url);
