@@ -24,7 +24,6 @@ const postSchema = new Schema({
 }
 );
 
-// Buat model dari skema
 const Post = mongoose.model('post', postSchema)
 
 export default Post
