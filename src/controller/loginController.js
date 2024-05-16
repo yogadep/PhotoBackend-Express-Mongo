@@ -1,6 +1,9 @@
 import Jwt  from "jsonwebtoken";
 import Admin from "../model/admin.js";
 import bcrypt from "bcrypt";
+import dotenv from "dotenv"
+
+dotenv.config();
 
 export const login = async (req, res) => {
     const {username, password} = req.body;
@@ -16,7 +19,7 @@ export const login = async (req, res) => {
                     userId: user._id,
                     username: user.username 
                 }, 
-                'secret',
+                process.env.secret,
                 { expiresIn: '1h' });
             res.status(200).json({token})
         }

@@ -3,9 +3,13 @@ import mongoose from 'mongoose';
 import adminRouter from './routes/adminRoutes.js';
 import loginRouter from './routes/loginRoutes.js';
 import postRouter from './routes/postRoutes.js';
+import dotenv from "dotenv"
+import { connect } from './library/db.js';
+
+dotenv.config()
 
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000;
 
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true })); 
@@ -14,20 +18,15 @@ app.use('/admin', adminRouter)
 app.use('/auth', loginRouter)
 app.use('/posts', postRouter)
 
-
-const url = `url mongodb`
-
-// connect
-const connect = async () => {
+const startServer = async () => {
     try {
-        await mongoose.connect(url);
+        await connect()
         app.listen(port, ()=>{
-            console.log(`app listen on port : ${port}`)
+            console.log(`app listen on port: ${port}`);
         })
-       
     } catch (error) {
-        console.log(error)
+        console.log(`Gagal terhubung ke server: ${error.message}`);
     }
 }
 
-connect();
+startServer()
