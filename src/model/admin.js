@@ -19,17 +19,6 @@ const adminSchema = new Schema({
 { timestamps: true }
 );
 
-// Menghash password sebelum disimpan di database
-// adminSchema.pre('save', function (next) {
-//   const admin = this;
-//   if (!admin.isModified('password')) return next();
-//   bcrypt.hash(admin.password, 10, (err, hash) => {
-//     if (err) return next(err);
-//     admin.password = hash; // Ganti password dengan hash
-//     next();
-//   });
-// });
-
 adminSchema.pre('save', async function(next) {
   const modifyPassword = this.isModified('password');
   // if(!this.isModified('password')) return next()
