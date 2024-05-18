@@ -5,6 +5,7 @@ import loginRouter from './routes/loginRoutes.js';
 import postRouter from './routes/postRoutes.js';
 import dotenv from "dotenv"
 import { connect } from './library/db.js';
+import { errorHandler } from './middleeware/errorHandler.js';
 
 dotenv.config()
 
@@ -17,6 +18,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/admin', adminRouter)
 app.use('/auth', loginRouter)
 app.use('/posts', postRouter)
+
+// using global errorHandler
+app.use(errorHandler)
 
 const startServer = async () => {
     try {

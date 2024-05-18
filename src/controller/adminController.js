@@ -5,7 +5,8 @@ export const getAdmins = async (req, res) => {
         const admins = await Admin.find()
         return res.status(200).json({ admins })
     } catch (error) {
-        return res.status(400).json({ message: 'Terdapat kesalahan', error: error.message })
+        // throw error to errorHandler
+        next(error)
     }
 }
 
@@ -18,10 +19,7 @@ export const getAdmin = async (req, res) => {
             return res.status(200).json({ admin })
         }
     } catch (error) {
-        return res.status(500).json({ 
-            error: 'Terjadi kesalahan server',
-            detail: error.message
-        });
+        next(error)
     }
 }
 
@@ -61,10 +59,7 @@ export const updateAdmin = async (req,res) => {
         );
         return res.status(200).json(updAdmin)
     } catch (error) {
-        return res.status(400).json({
-            error : "Terjadi kesalahan saat input data",
-            detail: error.message
-        })
+        next(error)
     }
 }
 
@@ -77,7 +72,7 @@ export const deleteAdmin = async (req, res) => {
         const delAdmin = await Admin.findByIdAndDelete({_id: id})
         return res.status(200).json({ message: "berhasil menghapus data", delAdmin })
     } catch (error) {
-        return res.status(400).json({ error: "gagal menghapus data" })
+        next(error)
     }
 }
 
