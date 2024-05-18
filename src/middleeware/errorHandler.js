@@ -1,5 +1,5 @@
 export const errorHandler = (err, req, res, next) => {
-    console.error(err.stack); // Log stack trace kesalahan untuk debugging
+    console.error(err.stack); 
 
     res.status(err.status || 500).json({
         error: {

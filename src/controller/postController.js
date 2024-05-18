@@ -1,32 +1,26 @@
 import Post from "../model/post.js";
 
-export const getAllPosts = async (req, res)=>{
+export const getAllPosts = async (req, res, next)=>{
     try {
         const posts = await Post.find().populate('createdBy', 'nama')
         res.status(200).json({ posts })
     } catch (error) {
-        res.status(400).json({ 
-            error: "Terdapat kesalahan",
-            detail: error.message 
-        })
+        next(error)
     }
 }
 
-export const getPost = async (req, res) => {
+export const getPost = async (req, res, next) => {
     const post = await Post.findById(req.params.id);
 
     if(!post) return res.status(400).json({ error: 'Postingan tidak ditemukan' })
     try {
         return res.status(200).json({ post })
     } catch (error) {
-        return res.status(200).json(
-            { error: 'Terjadi kesalahan server' },
-            { detail : error.message }
-        )
+        next(error)
     }
 }
 
-export const createPost = async (req, res) => {
+export const createPost = async (req, res, next) => {
     if (!req.file) {
         res.status(400).json({ error: 'Tidak ada file yang diunggah' });
     }
@@ -42,14 +36,11 @@ export const createPost = async (req, res) => {
         const savedPost = await newPost.save();
         res.status(201).json({ post: savedPost });
     } catch (error) {
-        res.status(400).json({
-            error: 'Gagal membuat post',
-            detail: error.message 
-        });
+        next(error)
     }
 }
 
-export const updatePost = async (req, res) => {
+export const updatePost = async (req, res, next) => {
     const { id } = req.params;
     const { title, content } = req.body;
     const image = req.file.filename;
@@ -67,6 +58,6 @@ export const updatePost = async (req, res) => {
         )
         return res.status(200).json(updatedPost)
     } catch (error) {
-        return res.status(400).json({error : "Terjadi kesalahan mengubah postingan", detail: error.message})
+        next(error)
     }
 }

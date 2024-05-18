@@ -1,11 +1,8 @@
 import Jwt  from "jsonwebtoken";
 import Admin from "../model/admin.js";
 import bcrypt from "bcrypt";
-import dotenv from "dotenv"
 
-dotenv.config();
-
-export const login = async (req, res) => {
+export const login = async (req, res, next) => {
     const {username, password} = req.body;
 
     try {
@@ -24,6 +21,6 @@ export const login = async (req, res) => {
             res.status(200).json({token})
         }
     } catch (error) {
-        res.status(500).json({ error: 'Login failed' });
+        next(error)
     }
 }

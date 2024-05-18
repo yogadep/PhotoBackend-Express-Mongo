@@ -6,7 +6,8 @@ export const verifyToken = (req, res, next) => {
         if(!token){
             res.status(400).json({error: "token tidak ditemukan"})
         }
-        const decoded = jwt.verify(token, 'secret'); 
+        
+        const decoded = jwt.verify(token, process.env.secret); 
         req.user = decoded; 
         next(); 
     } catch (error) {

@@ -1,13 +1,9 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import adminRouter from './routes/adminRoutes.js';
 import loginRouter from './routes/loginRoutes.js';
 import postRouter from './routes/postRoutes.js';
-import dotenv from "dotenv"
 import { connect } from './library/db.js';
 import { errorHandler } from './middleeware/errorHandler.js';
-
-dotenv.config()
 
 const app = express()
 const port = process.env.PORT || 3000;
