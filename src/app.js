@@ -5,6 +5,7 @@ import postRouter from './routes/postRoutes.js';
 import { connect } from './library/db.js';
 import { errorHandler } from './middleeware/errorHandler.js';
 
+
 const app = express()
 const port = process.env.PORT || 3000;
 
@@ -18,6 +19,7 @@ app.use('/posts', postRouter)
 // using global errorHandler
 app.use(errorHandler)
 
+// connetion
 const startServer = async () => {
     try {
         await connect()
