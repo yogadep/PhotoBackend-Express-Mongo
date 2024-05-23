@@ -4,10 +4,13 @@ import loginRouter from './routes/loginRoutes.js';
 import postRouter from './routes/postRoutes.js';
 import { connect } from './library/db.js';
 import { errorHandler } from './middleeware/errorHandler.js';
+import cors from 'cors';
 
 
 const app = express()
 const port = process.env.PORT || 3000;
+
+app.use(cors());
 
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true })); 
