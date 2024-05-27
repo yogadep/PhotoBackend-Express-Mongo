@@ -43,14 +43,20 @@ export const createPost = async (req, res, next) => {
 export const updatePost = async (req, res, next) => {
     const { id } = req.params;
     const { title, content } = req.body;
-    const image = req.file.filename;
+    // let img; 
     try {
         const updPost = {
             title,
             content,
-            image,
             createdBy: req.user.userId,
         }
+        if(req.file) updPost.image = req.file.filename;
+        // if(image) updPost.image = image;
+        // if(req.file){
+        //     img = req.file.filename;
+        //     updPost.image = img;
+        // } 
+
         const updatedPost = await Post.findOneAndUpdate(
             { _id : id },
             { $set: updPost },
