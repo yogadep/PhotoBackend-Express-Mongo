@@ -4,7 +4,8 @@ import
      getAllPosts,
      createPost,
      updatePost,
-     getPost 
+     getPost,
+     deletePost
     } from "../controller/postController.js";
 import { verifyToken } from "../middleeware/verifikasiToken.js";
 import { upload } from "../middleeware/uploadPic.js";
@@ -17,5 +18,6 @@ postRouter
 postRouter
     .put('/:id', verifyToken, upload.single('image'), updatePost )
     .get('/:id', getPost)
+    .delete('/:id', verifyToken, deletePost)
 
 export default postRouter;

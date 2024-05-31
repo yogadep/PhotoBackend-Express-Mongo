@@ -67,3 +67,16 @@ export const updatePost = async (req, res, next) => {
         next(error)
     }
 }
+
+export const deletePost = async (req, res, next) => {
+    const { id } = req.params;
+    try {
+        if(!id){
+            return res.status(400).json({ error : "Id tidak ditemukan" })
+        } 
+        const delPost = await Post.findByIdAndDelete({ _id: id })
+        return res.status(200).json({ message: "Berhasil menghapus konten", delPost })
+    } catch (error) {
+        next(error)
+    }
+}
