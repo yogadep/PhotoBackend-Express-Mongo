@@ -9,12 +9,30 @@ import
     } from "../controller/postController.js";
 import { verifyToken } from "../middleeware/verifikasiToken.js";
 import { upload } from "../middleeware/uploadPic.js";
+import { body } from "express-validator";
+import validate from "../middleeware/validation.js"
+
 
 const postRouter = Router()
 
+const postValidation = [
+    body('title')
+        .exists({ checkFalsy: true })
+        .withMessage('title wajib diisi')
+        .isString()
+        .withMessage('title harus string'),
+    body('content')
+        .exists({ checkFalsy: true })
+        .withMessage('content wajib diisi')
+        .isString()
+        .withMessage('content harus string')
+        .isLength({ min: 5 })
+        .withMessage("content minimal 5 karakter"),
+]
+
 postRouter
     .get('/', getAllPosts)
-    .post('/', verifyToken, upload.single('image'), createPost);
+    .post('/', verifyToken, upload.single('image'), postValidation, validate, createPost);
 postRouter
     .put('/:id', verifyToken, upload.single('image'), updatePost )
     .get('/:id', getPost)
