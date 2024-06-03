@@ -12,12 +12,11 @@ import { upload } from "../middleeware/uploadPic.js";
 import { body, check } from "express-validator";
 import validate from "../middleeware/validation.js"
 
-
 const postRouter = Router()
-
+// post validation -> validation
 const postValidation = [
     body('title')
-        .exists({ checkFalsy: true })
+        .exists()
         .withMessage('title wajib diisi')
         .isString()
         .withMessage('title harus string'),
@@ -34,8 +33,9 @@ const postValidation = [
             if(!req.file){
                 throw new Error('Gambar tidak ditemukan')
             }
-            const allowedMimeTypes = ['image/jpeg', 'image/png'];
-            if (!allowedMimeTypes.includes(req.file.mimetype)) {
+            const allowedExtensions = ['image/jpeg', 'image/png'];
+            // mime : file extensions
+            if (!allowedExtensions.includes(req.file.mimetype)) {
                 throw new Error('Hanya file JPG atau PNG yang diperbolehkan');
             }
             return true;
