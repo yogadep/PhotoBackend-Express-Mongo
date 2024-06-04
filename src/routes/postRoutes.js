@@ -52,7 +52,7 @@ const updateValidation = [
         .optional()
         .isLength({ min: 5, max: 20 })
         .withMessage('Panjang konten antara 5-20 karakter'),
-    body('image')
+    check('image')
         .custom((value, {req}) => {
 		   if(!req.file){
 				return true;
