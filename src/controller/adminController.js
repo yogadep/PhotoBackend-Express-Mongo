@@ -66,9 +66,6 @@ export const updateAdmin = async (req,res) => {
 export const deleteAdmin = async (req, res) => {
     const { id } = req.params;
     try {
-        if (!id) {
-           return res.status(400).json({error: "Id tidak ditemukan"})
-        }
         const delAdmin = await Admin.findByIdAndDelete({_id: id})
         return res.status(200).json({ message: "berhasil menghapus data", delAdmin })
     } catch (error) {
