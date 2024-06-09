@@ -1,5 +1,6 @@
 import express from 'express';
 import adminRouter from './routes/adminRoutes.js';
+import userRouter  from './routes/userRoutes.js';
 import loginRouter from './routes/loginRoutes.js';
 import postRouter from './routes/postRoutes.js';
 import { connect } from './library/db.js';
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true })); 
 
 app.use('/admin', adminRouter)
+app.use('/user', userRouter)
 app.use('/auth', loginRouter)
 app.use('/posts', postRouter)
 

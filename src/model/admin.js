@@ -36,9 +36,9 @@ adminSchema.pre('save', async function(next) {
 });
 
 adminSchema.pre('findOneAndUpdate', async function(next){
-  console.log('Middleware findOneAndUpdate dipanggil');
-  const update = this.getUpdate(); // Mendapatkan data yang diupdate
-  console.log('Data yang akan diupdate:', update);
+  // console.log('Middleware findOneAndUpdate dipanggil');
+  // const update = this.getUpdate(); // Mendapatkan data yang diupdate
+  // console.log('Data yang akan diupdate:', update);
 
   if(update.password){
     try {
@@ -54,7 +54,6 @@ adminSchema.pre('findOneAndUpdate', async function(next){
   } 
   next();
 });
-
 
 // Buat model dari skema
 const Admin = mongoose.model('admins', adminSchema);
