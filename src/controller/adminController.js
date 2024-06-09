@@ -46,11 +46,7 @@ export const postAdmin = async (req, res) => {
 export const updateAdmin = async (req,res) => {
     const { id } = req.params;
     const { name, username, password} = req.body;
-
-    if(!id || !name || !username || !password){
-        return res.status(400).json({error: "inputan harus lengkap"})
-    }
-    
+ 
     try {
         const updAdmin = await Admin.findOneAndUpdate(
             { _id: id},

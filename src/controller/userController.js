@@ -37,3 +37,19 @@ export const createUser = async (req, res) => {
         })
     }
 }
+
+export const updateUser = async (req, res, next) => {
+    const { id } = req.params;
+    const { name, email, password } = req.body;
+
+    try {
+        const updUser = await User.findOneAndUpdate(
+            { _id: id },
+            { name, email, password },
+            { new: true }
+        )
+        return res.status(200).json(updUser)
+    } catch (error) {
+        next(error)
+    }
+}
