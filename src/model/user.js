@@ -21,7 +21,7 @@ const userSchema = new Schema(
     }
 );
 
-userSchema.pre('save', async function(next) {
+userSchema.pre('save', async function(next){
     const modifyPassword = this.isModified('password');
 
     if(!modifyPassword) return next;
@@ -35,6 +35,23 @@ userSchema.pre('save', async function(next) {
       next(error)
     }
 });
+
+userSchema.pre('findOneAndUpdate', async function(next){
+    const update = this.getUpdate();
+    if(update.password){
+        try {
+            const salt = await bcrypt.genSalt(10);
+            const hashedPass = await bcrypt.hash(update.password, salt);
+            this.setUpdate({
+                ...update,
+                password : hashedPass
+              })
+        } catch (error) {
+            next(error)
+        }
+    }
+    next()
+})
 
 // Buat model dari skema
 const User = mongoose.model('users', userSchema);

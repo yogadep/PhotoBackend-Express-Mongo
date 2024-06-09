@@ -19,7 +19,7 @@ const adminSchema = new Schema({
 { timestamps: true }
 );
 
-adminSchema.pre('save', async function(next) {
+adminSchema.pre('save', async function(next){
   const modifyPassword = this.isModified('password');
   // if(!this.isModified('password')) return next()
   if(!modifyPassword) return next;
@@ -37,7 +37,7 @@ adminSchema.pre('save', async function(next) {
 
 adminSchema.pre('findOneAndUpdate', async function(next){
   // console.log('Middleware findOneAndUpdate dipanggil');
-  // const update = this.getUpdate(); // Mendapatkan data yang diupdate
+  const update = this.getUpdate(); // Mendapatkan data yang diupdate
   // console.log('Data yang akan diupdate:', update);
 
   if(update.password){
