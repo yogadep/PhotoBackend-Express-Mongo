@@ -14,4 +14,3 @@ export const verifyToken = (req, res, next) => {
         res.status(401).json({ error: 'Token tidak valid atau kedaluwarsa' });
     }
 }
-

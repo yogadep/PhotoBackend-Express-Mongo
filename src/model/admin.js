@@ -7,7 +7,7 @@ const adminSchema = new Schema({
     type: String,
     required: true,
   },
-  username: {
+  email: {
     type: String,
     require: true,
   },

@@ -24,15 +24,15 @@ export const getAdmin = async (req, res) => {
 }
 
 export const postAdmin = async (req, res) => {
-    const {name, username, password} = req.body;
+    const {name, email, password} = req.body;
 
-    if(!name || !username || !password){
+    if(!name || !email || !password){
         return res.status(400).json({
             error: "inputan harus lengkap"
         })
     }
     try {
-        const newAdmin = new Admin({name, username, password})
+        const newAdmin = new Admin({name, email, password})
         const addAdmin = await newAdmin.save()
         return res.status(200).json(addAdmin)
     } catch (error) {
@@ -45,12 +45,12 @@ export const postAdmin = async (req, res) => {
 
 export const updateAdmin = async (req,res) => {
     const { id } = req.params;
-    const { name, username, password} = req.body;
+    const { name, email, password} = req.body;
  
     try {
         const updAdmin = await Admin.findOneAndUpdate(
             { _id: id},
-            { name, username, password },
+            { name, email, password },
             { new: true }
         );
         return res.status(200).json(updAdmin)

@@ -11,6 +11,7 @@ import { verifyToken } from "../middleeware/verifikasiToken.js";
 import { upload } from "../middleeware/uploadPic.js";
 import { body, check } from "express-validator";
 import validate from "../middleeware/validation.js"
+import { checkRole } from "../controller/checkRole.js";
 
 const postRouter = Router()
 // post validation -> validation middleware
@@ -69,10 +70,10 @@ const updateValidation = [
 
 postRouter
     .get('/', getAllPosts)
-    .post('/', verifyToken, upload.single('image'), postValidation, validate, createPost);
+    .post('/', verifyToken, checkRole('admin'), upload.single('image'), postValidation, validate, createPost);
 postRouter
-    .put('/:id', verifyToken, upload.single('image'), updateValidation, validate, updatePost)
+    .put('/:id', verifyToken, checkRole('admin'), upload.single('image'), updateValidation, validate, updatePost)
     .get('/:id', getPost)
-    .delete('/:id', verifyToken, deletePost)
+    .delete('/:id', verifyToken, checkRole('admin'), deletePost)
 
 export default postRouter;
