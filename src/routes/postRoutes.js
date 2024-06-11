@@ -7,7 +7,7 @@ import
      getPost,
      deletePost
     } from "../controller/postController.js";
-import { verifyToken } from "../middleeware/verifikasiToken.js";
+import { verifyToken } from "../middleeware/verifficationToken.js";
 import { upload } from "../middleeware/uploadPic.js";
 import { checkRole } from "../middleeware/checkRole.js";
 import { postValidation, updateValidation, validate } from "../middleeware/validation.js";
