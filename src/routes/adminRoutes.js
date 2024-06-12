@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { 
-     createAdminValidation,
-     updateAdminValidation,
+     createUserValidation,
+     updateUserValidation,
      result 
     } from "../middleeware/userValidation.js";
 import { 
@@ -15,9 +15,9 @@ import {
 const adminRouter = Router();
 
 adminRouter.get('/', getAdmins)
-    .post('/', createAdminValidation, result, createAdmin)
+    .post('/', createUserValidation, result, createAdmin)
 adminRouter.get('/:id', getAdmin)
-    .put('/:id', updateAdminValidation, result, updateAdmin)
+    .put('/:id', updateUserValidation, result, updateAdmin)
     .delete('/:id', deleteAdmin)
 
 export default adminRouter;

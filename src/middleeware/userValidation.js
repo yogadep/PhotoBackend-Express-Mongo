@@ -1,6 +1,6 @@
 import { body, check, validationResult } from "express-validator";
 
-export const createAdminValidation = [
+export const createUserValidation = [
     body('name')
         .exists({ checkFalsy: true })
         .withMessage('Name field is required')
@@ -20,7 +20,7 @@ export const createAdminValidation = [
         .withMessage('Password should be at least 5 characters')
 ]
 
-export const updateAdminValidation = [
+export const updateUserValidation = [
     body('name')
         .optional()
         .isString()

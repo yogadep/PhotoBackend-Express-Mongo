@@ -7,18 +7,22 @@ import
      getPost,
      deletePost
     } from "../controller/postController.js";
+import { 
+     createPostValidation,
+     updatePostValidation,
+     result 
+    } from "../middleeware/postValidation.js";
 import { verifyToken } from "../middleeware/verifficationToken.js";
 import { upload } from "../middleeware/uploadPic.js";
 import { checkRole } from "../middleeware/checkRole.js";
-import { postValidation, updateValidation, validate } from "../middleeware/postValidation.js";
 
 const postRouter = Router()
 
 postRouter
     .get('/', getAllPosts)
-    .post('/', verifyToken, checkRole('admin'), upload.single('image'), postValidation, validate, createPost);
+    .post('/', verifyToken, checkRole('admin'), upload.single('image'), createPostValidation, result, createPost);
 postRouter
-    .put('/:id', verifyToken, checkRole('admin'), upload.single('image'), updateValidation, validate, updatePost)
+    .put('/:id', verifyToken, checkRole('admin'), upload.single('image'), updatePostValidation, result, updatePost)
     .get('/:id', getPost)
     .delete('/:id', verifyToken, checkRole('admin'), deletePost)
 

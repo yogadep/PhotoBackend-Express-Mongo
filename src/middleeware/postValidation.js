@@ -1,6 +1,6 @@
 import { body, check, validationResult } from "express-validator";
 
-export const postValidation = [
+export const createPostValidation = [
     body('title')
         .exists({ checkFalsy: true })
         .withMessage('title wajib diisi')
@@ -29,7 +29,7 @@ export const postValidation = [
         })
 ]
 
-export const updateValidation = [
+export const updatePostValidation = [
     body('title')
         .optional()
         .isLength({ min: 5, max: 20 })
@@ -53,7 +53,7 @@ export const updateValidation = [
         })
 ]
 
-export const validate = (req, res, next) => {
+export const result = (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
