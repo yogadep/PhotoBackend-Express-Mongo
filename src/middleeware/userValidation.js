@@ -41,7 +41,7 @@ export const result = (req, res, next) => {
     const err = validationResult(req);
 
     if(!err.isEmpty()){
-        return res.status(200).json({ errors: err.array() })
+        return res.status(200).json({ error: err.array() })
     }
     next()
 }

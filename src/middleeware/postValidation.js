@@ -56,7 +56,7 @@ export const updatePostValidation = [
 export const result = (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+        return res.status(400).json({ error: errors.array() });
     }
     next();
 };
