@@ -10,7 +10,7 @@ import
 import { verifyToken } from "../middleeware/verifficationToken.js";
 import { upload } from "../middleeware/uploadPic.js";
 import { checkRole } from "../middleeware/checkRole.js";
-import { postValidation, updateValidation, validate } from "../middleeware/validation.js";
+import { postValidation, updateValidation, validate } from "../middleeware/postValidation.js";
 
 const postRouter = Router()
 

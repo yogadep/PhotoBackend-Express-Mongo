@@ -23,7 +23,7 @@ export const getAdmin = async (req, res) => {
     }
 }
 
-export const postAdmin = async (req, res) => {
+export const createAdmin = async (req, res) => {
     const {name, email, password} = req.body;
 
     if(!name || !email || !password){

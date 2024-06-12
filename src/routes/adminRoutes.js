@@ -1,18 +1,23 @@
 import { Router } from "express";
 import { 
+     createAdminValidation,
+     updateAdminValidation,
+     result 
+    } from "../middleeware/userValidation.js";
+import { 
+     createAdmin,
      deleteAdmin,
-     getAdmin, getAdmins,
-     postAdmin,
+     getAdmin,
+     getAdmins,
      updateAdmin 
     } from "../controller/adminController.js";
-
 
 const adminRouter = Router();
 
 adminRouter.get('/', getAdmins)
-    .post('/', postAdmin)
+    .post('/', createAdminValidation, result, createAdmin)
 adminRouter.get('/:id', getAdmin)
-    .put('/:id', updateAdmin)
+    .put('/:id', updateAdminValidation, result, updateAdmin)
     .delete('/:id', deleteAdmin)
 
 export default adminRouter;
