@@ -39,14 +39,13 @@ export const createProduct = async (req, res, next) => {
 export const updateProduct = async (req, res, next) => {
     const { id } = req.params;
     const { name, price, stock } = req.body;
-    let img = req.file.filename;
     try {
         const newProduct = {
             name,
             price,
             stock
         }
-        if(req.file) newProduct.image = img;
+        if(req.file) newProduct.image = req.file.filename
         const savedProduct = await Product.findOneAndUpdate(
             { _id: id },
             { $set: newProduct },
@@ -56,5 +55,4 @@ export const updateProduct = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-
 }
