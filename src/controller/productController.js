@@ -35,3 +35,26 @@ export const createProduct = async (req, res, next) => {
         next(error);
     }
 }
+
+export const updateProduct = async (req, res, next) => {
+    const { id } = req.params;
+    const { name, price, stock } = req.body;
+    let img = req.file.filename;
+    try {
+        const newProduct = {
+            name,
+            price,
+            stock
+        }
+        if(req.file) newProduct.image = img;
+        const savedProduct = await Product.findOneAndUpdate(
+            { _id: id },
+            { $set: newProduct },
+            { new: true }
+        )
+        return res.status(200).json(savedProduct)
+    } catch (error) {
+        next(error);
+    }
+
+}
