@@ -3,6 +3,7 @@ import adminRouter from './routes/adminRoutes.js';
 import userRouter  from './routes/userRoutes.js';
 import loginRouter from './routes/loginRoutes.js';
 import postRouter from './routes/postRoutes.js';
+import productRouter from './routes/productRoutes.js';
 import { connect } from './library/db.js';
 import { errorHandler } from './middleeware/errorHandler.js';
 import cors from 'cors';
@@ -20,6 +21,7 @@ app.use('/admin', adminRouter)
 app.use('/user', userRouter)
 app.use('/auth', loginRouter)
 app.use('/posts', postRouter)
+app.use('/product', productRouter)
 
 // using global errorHandler
 app.use(errorHandler)
