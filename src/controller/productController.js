@@ -30,7 +30,7 @@ export const createProduct = async (req, res, next) => {
             image
         })
         const savedProduct = await newProduct.save()
-        return res.status(200).json({ savedProduct })
+        return res.status(200).json({ message:"Succesfully added product", savedProduct })
     } catch (error) {
         next(error);
     }
@@ -51,8 +51,18 @@ export const updateProduct = async (req, res, next) => {
             { $set: newProduct },
             { new: true }
         )
-        return res.status(200).json(savedProduct)
+        return res.status(200).json({ message:"Succesfully updated product", savedProduct})
     } catch (error) {
         next(error);
+    }
+}
+
+export const deleteProduduct = async (req, res, next) => {
+    const { id } = req.params;
+    try {
+        const delProduct = await Product.findByIdAndDelete({ _id: id })
+        return res.status(200).json({ message: "Succesfully deleted product", delProduct })
+    } catch (error) {
+        next(error)   
     }
 }
