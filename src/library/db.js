@@ -4,6 +4,8 @@ import dotenv from "dotenv"
 dotenv.config()
 
 const url = process.env.DATABASE_URL
+console.log('MongoDB URL:', url);
+
 
 // connect
 export const connect = async () => {
